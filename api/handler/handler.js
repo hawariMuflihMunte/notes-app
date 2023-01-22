@@ -37,6 +37,7 @@ const addNote = (request, h) => {
 		status: 'fail',
 		message: 'Catatan gagal ditambahkan',
 	});
+
 	response.code(500);
 
 	return response;
@@ -67,13 +68,76 @@ const getNoteById = (request, h) => {
 		status: 'fail',
 		message: 'Catatan tidak ditemukan',
 	});
+
 	response.code(404);
 
 	return response;
+};
+
+const editNoteById = (request, h) => {
+	const {id} = request.params;
+
+	const {
+		title,
+		tags,
+		body,
+	} = request.payload;
+
+	const updatedAt = new Date().toISOString();
+
+	const index = notes.findIndex(note => note.id === id);
+
+	if (index !== -1) {
+		notes[index] = {
+			...notes[index],
+			title,
+			tags,
+			body,
+			updatedAt,
+		};
+
+		const response = h.response({
+			status: 'success',
+			message: 'Catatan berhasil diperbarui',
+		});
+
+		response.code(200);
+
+		return response;
+	}
+
+	const response = h.response({
+		status: 'fail',
+		message: 'Gagal memperbarui catatan. Id tidak ditemukan',
+	});
+
+	response.code(404);
+
+	return response;
+};
+
+const deleteNoteById = (request, h) => {
+	const {id} = request.params;
+
+	const index = notes.findIndex(note => note.id === id);
+
+	if (index !== -1) {
+		notes.splice(index, 1);
+		const response = h.response({
+			status: 'success',
+			message: 'Catatan berhasil dihapus',
+		});
+
+		response.code(200);
+
+		return response;
+	}
 };
 
 module.exports = {
 	getAllNotes,
 	getNoteById,
 	addNote,
+	editNoteById,
+	deleteNoteById,
 };
