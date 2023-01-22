@@ -1,0 +1,31 @@
+{
+    "name": "notes-app",
+    "version": "1.0.0",
+    "description": "Simple Notes API",
+    "main": "index.js",
+    "scripts": {
+        "start:prod": "node ./server.js",
+        "start:dev": "nodemon ./server.js",
+        "lint": "eslint ./"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hawariMuflihMunte/notes-app.git"
+    },
+    "keywords": [
+        "notes-api"
+    ],
+    "author": "Hawari Muflih Munte",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/hawariMuflihMunte/notes-app/issues"
+    },
+    "homepage": "https://github.com/hawariMuflihMunte/notes-app#readme",
+    "devDependencies": {
+        "eslint": "^8.32.0",
+        "nodemon": "^2.0.20"
+    },
+    "dependencies": {
+        "@hapi/hapi": "^21.2.0"
+    }
+}
